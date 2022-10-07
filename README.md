@@ -22,4 +22,4 @@ Based off of this we should see an linear increase in each section, as inflation
 ### Data Set Links
 - [Census Data: Income](https://data.census.gov/cedsci/table?q=Income&g=0100000US%240400000&tid=ACSST1Y2021.S1901)
 - [Census Data: Discription and Cost of Housing](https://data.census.gov/cedsci/table?q=Rent&g=0100000US%240400000&tid=ACSDP1Y2021.DP04)
-- [Average Cost Of Essentials]:(https://www.numbeo.com/cost-of-living/region_rankings_current.jsp?region=021)
+- [Average Cost Of Essentials](https://www.numbeo.com/cost-of-living/region_rankings_current.jsp?region=021)
