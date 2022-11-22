@@ -3,10 +3,10 @@
 # Loading Income Data # 
 
 # Working on Desktop
-#setwd("C:/Users/Naran/Desktop/Data Analytics Project/Income Data")
+setwd("C:/Users/Naran/Data-Analytics-Project-6000/Data Analytics Project/Housing Statistic")
 
 #Working on Laptop
-setwd("C:/Users/Naran/Data-Analytics-Project-6000/Data Analytics Project/Income Data")
+# setwd("C:/Users/Naran/Data-Analytics-Project-6000/Data Analytics Project/Income Data")
 
 Income_data_ACS_2010 <- read.csv("ACSST1Y2010.S1901-Data.csv", skip=1)
 Income_data_ACS_2011 <- read.csv("ACSST1Y2011.S1901-Data.csv", skip=1)
@@ -24,10 +24,8 @@ summary(Income_data_ACS_2010)
 # Loading Housing Statistics # 
 
 # Working on Desktop
-#setwd("C:/Users/Naran/Desktop/Data Analytics Project/Housing Statistic")
-
-#Working on Laptop
 setwd("C:/Users/Naran/Data-Analytics-Project-6000/Data Analytics Project/Housing Statistic")
+
 
 Housing_data_ACS_2010 <- read.csv("ACSDP1Y2010.DP04-Data.csv", skip=1)
 Housing_data_ACS_2011 <- read.csv("ACSDP1Y2011.DP04-Data.csv", skip=1)
@@ -44,11 +42,7 @@ Housing_data_ACS_2021 <- read.csv("ACSDP1Y2021.DP04-Data.csv", skip=1)
 
 #Load Cost of Living Data
 
-# Working on Desktop
-#setwd("C:/Users/Naran/Desktop/Data Analytics Project")
-
-#Working on Laptop
-setwd("C:/Users/Naran/Data-Analytics-Project-6000/Data Analytics Project")
+# setwd("C:/Users/Naran/Data-Analytics-Project-6000/Data Analytics Project")
 
 
 cost_of_living_data <- read.csv("Cost_Of_Living_By_State.csv")
