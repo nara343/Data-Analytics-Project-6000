@@ -3,7 +3,7 @@
 # Loading Income Data # 
 
 # Working on Desktop
-setwd("C:/Users/Naran/Data-Analytics-Project-6000/Data Analytics Project/Housing Statistic")
+setwd("C:/Users/Naran/Data-Analytics-Project-6000/Data Analytics Project/Income Data")
 
 #Working on Laptop
 # setwd("C:/Users/Naran/Data-Analytics-Project-6000/Data Analytics Project/Income Data")
