@@ -38,22 +38,51 @@ Income_data_ACS_2021 <- Income_data_ACS_2021[, remove_nas(Income_data_ACS_2021, 
 
 
 colnames(Income_data_ACS_2010)
-"Households..Estimate..Total"
-"Households..Estimate..Less.than..10.000"  
-"Households..Estimate...10.000.to..14.999"   
-"Households..Estimate...15.000.to..24.999"  
-"Households..Estimate...25.000.to..34.999"  
-"Households..Estimate...35.000.to..49.999"                                                                       
-"Households..Estimate...50.000.to..74.999"  
-"Households..Estimate...75.000.to..99.999" 
-"Households..Estimate...100.000.to..149.999"  
-"Households..Estimate...150.000.to..199.999"  
-"Households..Estimate...150.000.to..199.999" 
-"Households..Estimate...200.000.or.more"  
+household_features <- c("Geographic.Area.Name",
+                        "Households..Estimate..Total",
+                        "Households..Estimate..Less.than..10.000",  
+                        "Households..Estimate...10.000.to..14.999",   
+                        "Households..Estimate...15.000.to..24.999",  
+                        "Households..Estimate...25.000.to..34.999",  
+                        "Households..Estimate...35.000.to..49.999",                                                                       
+                        "Households..Estimate...50.000.to..74.999",  
+                        "Households..Estimate...75.000.to..99.999", 
+                        "Households..Estimate...100.000.to..149.999",  
+                        "Households..Estimate...150.000.to..199.999",  
+                        "Households..Estimate...150.000.to..199.999", 
+                        "Households..Estimate...200.000.or.more")  
+
+colnames(Income_data_ACS_2018)
+
+feature_names_updated <- c("Geographic.Area.Name",
+                           "Estimate..Households..Total",
+                           "Estimate..Households..Total..Less.than..10.000",  
+                           "Estimate..Households..Total...10.000.to..14.999",   
+                           "Estimate..Households..Total...15.000.to..24.999",  
+                           "Estimate..Households..Total...25.000.to..34.999",  
+                           "Estimate..Households..Total...35.000.to..49.999",                                                                       
+                           "Estimate..Households..Total...50.000.to..74.999",  
+                           "Estimate..Households..Total...75.000.to..99.999", 
+                           "Estimate..Households..Total...100.000.to..149.999",  
+                           "Estimate..Households..Total...150.000.to..199.999",  
+                           "Estimate..Households..Total...150.000.to..199.999", 
+                           "Estimate..Households..Total...200.000.or.more")
+
+idx <- match(feature_names_updated, names(Income_data_ACS_2018))
+idx
+Household_2018 <-Income_data_ACS_2018[, idx ]
+Household_2019 <- Income_data_ACS_2019[, idx ]
+Household_2021 <- Income_data_ACS_2021[, idx ]
 
 #### California  ####
+library(ggplot2)
 
+california_2018_household <- return_subset_by_state(Household_2018, "California")
+california_2018_household <- california_2018_household[, -c(1)]
 
+col_means <- colMeans(california_2018_household[paste0("Q", 1:12)])
+
+col_means
 
 #### New York  ####
 
