@@ -308,55 +308,7 @@ Plot_WA_2021 <- WA_2021 %>%
   labs(title = "Percent of Occupied Housing By County In Washington 2021")
 Plot_WA_2021
 
-# Cleaning the data 
 
-
-remove_nas <- function(df, Null) {
-  totalRows <- nrow(df)
-  print(totalRows)
-  index = c()
-  for ( i in colnames(df) ){
-    found = nrow(df[df[[i]] == Null, ])
-    if(found >= totalRows*0.5){
-      index <- append(index, c(FALSE))
-    }
-    else{ index <- append(index, c(TRUE))}
-  }
-  return(index)
-}
-
-#Removing Null Values Based On if There are more than 50, "NULL" values 
-# entry in the estimate and margin of error columns indicates that data for this geographic area cannot be displayed because the number of sample cases is too small
-Housing_data_ACS_2010 <- Housing_data_ACS_2010[, remove_nas(Housing_data_ACS_2010, "null")]
-Housing_data_ACS_2011 <- Housing_data_ACS_2011[, remove_nas(Housing_data_ACS_2011, "null")]
-Housing_data_ACS_2012 <- Housing_data_ACS_2012[, remove_nas(Housing_data_ACS_2012, "null")]
-Housing_data_ACS_2013 <- Housing_data_ACS_2013[, remove_nas(Housing_data_ACS_2013, "null")]
-Housing_data_ACS_2014 <- Housing_data_ACS_2014[, remove_nas(Housing_data_ACS_2014, "null")]
-Housing_data_ACS_2015 <- Housing_data_ACS_2015[, remove_nas(Housing_data_ACS_2015, "null")]
-Housing_data_ACS_2016 <- Housing_data_ACS_2016[, remove_nas(Housing_data_ACS_2016, "null")]
-Housing_data_ACS_2017 <- Housing_data_ACS_2017[, remove_nas(Housing_data_ACS_2017, "null")]
-Housing_data_ACS_2018 <- Housing_data_ACS_2018[, remove_nas(Housing_data_ACS_2018, "null")]
-Housing_data_ACS_2019 <- Housing_data_ACS_2019[, remove_nas(Housing_data_ACS_2019, "null")]
-Housing_data_ACS_2021 <- Housing_data_ACS_2021[, remove_nas(Housing_data_ACS_2021, "null")]
-
-#Removing Null Values Based On if There are more than 50, "Values with (X)"
-# means that the estimate is not applicable or not available
-Housing_data_ACS_2010 <- Housing_data_ACS_2010[, remove_nas(Housing_data_ACS_2010, "(X)")]
-Housing_data_ACS_2011 <- Housing_data_ACS_2011[, remove_nas(Housing_data_ACS_2011, "(X)")]
-Housing_data_ACS_2012 <- Housing_data_ACS_2012[, remove_nas(Housing_data_ACS_2012, "(X)")]
-Housing_data_ACS_2013 <- Housing_data_ACS_2013[, remove_nas(Housing_data_ACS_2013, "(X)")]
-Housing_data_ACS_2014 <- Housing_data_ACS_2014[, remove_nas(Housing_data_ACS_2014, "(X)")]
-Housing_data_ACS_2015 <- Housing_data_ACS_2015[, remove_nas(Housing_data_ACS_2015, "(X)")]
-Housing_data_ACS_2016 <- Housing_data_ACS_2016[, remove_nas(Housing_data_ACS_2016, "(X)")]
-Housing_data_ACS_2017 <- Housing_data_ACS_2017[, remove_nas(Housing_data_ACS_2017, "(X)")]
-Housing_data_ACS_2018 <- Housing_data_ACS_2018[, remove_nas(Housing_data_ACS_2018, "(X)")]
-Housing_data_ACS_2019 <- Housing_data_ACS_2019[, remove_nas(Housing_data_ACS_2019, "(X)")]
-Housing_data_ACS_2021 <- Housing_data_ACS_2021[, remove_nas(Housing_data_ACS_2021, "(X)")]
-
-# From looking at the data it looks like there are a lot of repretitive data, 
-# We are given the total number for the type of unit and then the margins 
-# And from there it is represented in a percentage. To simplify the data this might be broken down into
-# by the feature type and might only keep the percent values. 
 
 
 

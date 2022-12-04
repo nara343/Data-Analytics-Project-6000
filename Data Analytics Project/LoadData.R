@@ -42,7 +42,7 @@ Housing_data_ACS_2021 <- read.csv("ACSDP1Y2021.DP04-Data.csv", skip=1)
 
 #Load Cost of Living Data
 
-# setwd("C:/Users/Naran/Data-Analytics-Project-6000/Data Analytics Project")
+setwd("C:/Users/Naran/Data-Analytics-Project-6000/Data Analytics Project")
 
 
 cost_of_living_data <- read.csv("Cost_Of_Living_By_State.csv")
