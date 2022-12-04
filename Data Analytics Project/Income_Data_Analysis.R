@@ -84,6 +84,7 @@ col_means <- colMeans(california_2018_household[paste0("Q", 1:12)])
 
 col_means
 
+
 #### New York  ####
 
 
