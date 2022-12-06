@@ -46,3 +46,7 @@ setwd("C:/Users/Naran/Data-Analytics-Project-6000/Data Analytics Project")
 
 
 cost_of_living_data <- read.csv("Cost_Of_Living_By_State.csv")
+cost_of_living_data_by_county <- read.csv("Cost of Living/Cost_Of_Living_Atlanta_data.csv")
+
+
+cost_of_living_data_by_county <- cost_of_living_data_by_county[,-c(2,3)]
