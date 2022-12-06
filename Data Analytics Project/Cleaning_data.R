@@ -1,6 +1,7 @@
+
+
 remove_nas <- function(df, Null, rate=0.5) {
   totalRows <- nrow(df)
-  print(totalRows)
   index = c()
   for ( i in colnames(df) ){
     found = nrow(df[df[[i]] == Null, ])
@@ -50,6 +51,9 @@ create_data_entries <- function(df, count){
 
 #Removing Null Values Based On if There are more than 50, "NULL" values 
 # entry in the estimate and margin of error columns indicates that data for this geographic area cannot be displayed because the number of sample cases is too small
+Housing_data_ACS_2015 <- Housing_data_ACS_2015[, remove_nas(Housing_data_ACS_2015, "null")]
+Housing_data_ACS_2016 <- Housing_data_ACS_2016[, remove_nas(Housing_data_ACS_2016, "null")]
+Housing_data_ACS_2017 <- Housing_data_ACS_2017[, remove_nas(Housing_data_ACS_2017, "null")]
 Housing_data_ACS_2018 <- Housing_data_ACS_2018[, remove_nas(Housing_data_ACS_2018, "null")]
 Housing_data_ACS_2019 <- Housing_data_ACS_2019[, remove_nas(Housing_data_ACS_2019, "null")]
 Housing_data_ACS_2021 <- Housing_data_ACS_2021[, remove_nas(Housing_data_ACS_2021, "null")]
@@ -57,6 +61,9 @@ Housing_data_ACS_2021 <- Housing_data_ACS_2021[, remove_nas(Housing_data_ACS_202
 #Removing Null Values Based On if There are more than 50, "Values with (X)"
 # means that the estimate is not applicable or not available
 
+Housing_data_ACS_2015 <- Housing_data_ACS_2015[, remove_nas(Housing_data_ACS_2015, "(X)")]
+Housing_data_ACS_2016 <- Housing_data_ACS_2016[, remove_nas(Housing_data_ACS_2016, "(X)")]
+Housing_data_ACS_2017 <- Housing_data_ACS_2017[, remove_nas(Housing_data_ACS_2017, "(X)")]
 Housing_data_ACS_2018 <- Housing_data_ACS_2018[, remove_nas(Housing_data_ACS_2018, "(X)")]
 Housing_data_ACS_2019 <- Housing_data_ACS_2019[, remove_nas(Housing_data_ACS_2019, "(X)")]
 Housing_data_ACS_2021 <- Housing_data_ACS_2021[, remove_nas(Housing_data_ACS_2021, "(X)")]
@@ -74,80 +81,130 @@ colnames(cost_of_living_data_by_county)[2] <- "Geographic.Area.Name"
 colnames(Housing_data_ACS_2018)
 
 #Removing the Margin of Error Features
+Housing_Cleaned_data_2015 <- return_feature_subset_without_given_string(Housing_data_ACS_2015, "Margin.of.Error")
+Housing_Cleaned_data_2016 <- return_feature_subset_without_given_string(Housing_data_ACS_2016, "Margin.of.Error")
+Housing_Cleaned_data_2017 <- return_feature_subset_without_given_string(Housing_data_ACS_2017, "Margin.of.Error")
 Housing_Cleaned_data_2018 <- return_feature_subset_without_given_string(Housing_data_ACS_2018, "Margin.of.Error")
 Housing_Cleaned_data_2019 <- return_feature_subset_without_given_string(Housing_data_ACS_2019, "Margin.of.Error")
 Housing_Cleaned_data_2021 <- return_feature_subset_without_given_string(Housing_data_ACS_2021, "Margin.of.Error")
 
 #Removing Year Built
+Housing_Cleaned_data_2015 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2015, "YEAR.STRUCTURE.BUILT")
+Housing_Cleaned_data_2016 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2016, "YEAR.STRUCTURE.BUILT")
+Housing_Cleaned_data_2017 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2017, "YEAR.STRUCTURE.BUILT")
 Housing_Cleaned_data_2018 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2018, "YEAR.STRUCTURE.BUILT")
 Housing_Cleaned_data_2019 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2019, "YEAR.STRUCTURE.BUILT")
 Housing_Cleaned_data_2021 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2021, "YEAR.STRUCTURE.BUILT")
 
 #Removing Unit Structure
+Housing_Cleaned_data_2015 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2015, "UNITS.IN.STRUCTURE")
+Housing_Cleaned_data_2016 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2016, "UNITS.IN.STRUCTURE")
+Housing_Cleaned_data_2017 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2017, "UNITS.IN.STRUCTURE")
 Housing_Cleaned_data_2018 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2018, "UNITS.IN.STRUCTURE")
 Housing_Cleaned_data_2019 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2019, "UNITS.IN.STRUCTURE")
 Housing_Cleaned_data_2021 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2021, "UNITS.IN.STRUCTURE")
 
 #Removing Unit BEDROOMS
+Housing_Cleaned_data_2015 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2015, "BEDROOMS")
+Housing_Cleaned_data_2016 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2016, "BEDROOMS")
+Housing_Cleaned_data_2017 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2017, "BEDROOMS")
 Housing_Cleaned_data_2018 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2018, "BEDROOMS")
 Housing_Cleaned_data_2019 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2019, "BEDROOMS")
 Housing_Cleaned_data_2021 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2021, "BEDROOMS")
 
 #Removing Unit ROOMS
+Housing_Cleaned_data_2015 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2015, "ROOMS")
+Housing_Cleaned_data_2016 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2016, "ROOMS")
+Housing_Cleaned_data_2017 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2017, "ROOMS")
 Housing_Cleaned_data_2018 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2018, "ROOMS")
 Housing_Cleaned_data_2019 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2019, "ROOMS")
 Housing_Cleaned_data_2021 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2021, "ROOMS")
 
 
 #Removing Unit VEHICLES.AVAILABLE
+Housing_Cleaned_data_2015 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2015, "VEHICLES.AVAILABLE")
+Housing_Cleaned_data_2016 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2016, "VEHICLES.AVAILABLE")
+Housing_Cleaned_data_2017 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2017, "VEHICLES.AVAILABLE")
 Housing_Cleaned_data_2018 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2018, "VEHICLES.AVAILABLE")
 Housing_Cleaned_data_2019 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2019, "VEHICLES.AVAILABLE")
 Housing_Cleaned_data_2021 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2021, "VEHICLES.AVAILABLE")
 
 #Removing Unit HOUSE.HEATING.FUEL
+Housing_Cleaned_data_2015 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2015, "HOUSE.HEATING.FUEL")
+Housing_Cleaned_data_2016 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2016, "HOUSE.HEATING.FUEL")
+Housing_Cleaned_data_2017 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2017, "HOUSE.HEATING.FUEL")
 Housing_Cleaned_data_2018 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2018, "HOUSE.HEATING.FUEL")
 Housing_Cleaned_data_2019 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2019, "HOUSE.HEATING.FUEL")
 Housing_Cleaned_data_2021 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2021, "HOUSE.HEATING.FUEL")
 
 #Removing Unit MORTGAGE.STATUS
+Housing_Cleaned_data_2015 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2015, "MORTGAGE.STATUS")
+Housing_Cleaned_data_2016 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2016, "MORTGAGE.STATUS")
+Housing_Cleaned_data_2017 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2017, "MORTGAGE.STATUS")
 Housing_Cleaned_data_2018 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2018, "MORTGAGE.STATUS")
 Housing_Cleaned_data_2019 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2019, "MORTGAGE.STATUS")
 Housing_Cleaned_data_2021 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2021, "MORTGAGE.STATUS")
 
 #Removing Unit GROSS.RENT.AS.A.PERCENTAGE.OF.HOUSEHOLD.INCOME..GRAPI
+Housing_Cleaned_data_2015 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2015, "GROSS.RENT.AS.A.PERCENTAGE.OF.HOUSEHOLD.INCOME..GRAPI")
+Housing_Cleaned_data_2016 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2016, "GROSS.RENT.AS.A.PERCENTAGE.OF.HOUSEHOLD.INCOME..GRAPI")
+Housing_Cleaned_data_2017 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2017, "GROSS.RENT.AS.A.PERCENTAGE.OF.HOUSEHOLD.INCOME..GRAPI")
 Housing_Cleaned_data_2018 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2018, "GROSS.RENT.AS.A.PERCENTAGE.OF.HOUSEHOLD.INCOME..GRAPI")
 Housing_Cleaned_data_2019 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2019, "GROSS.RENT.AS.A.PERCENTAGE.OF.HOUSEHOLD.INCOME..GRAPI")
 Housing_Cleaned_data_2021 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2021, "GROSS.RENT.AS.A.PERCENTAGE.OF.HOUSEHOLD.INCOME..GRAPI")
 
 #Removing Unit SELECTED.MONTHLY.OWNER.COSTS
+Housing_Cleaned_data_2015 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2015, "SELECTED.MONTHLY.OWNER.COSTS")
+Housing_Cleaned_data_2016 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2016, "SELECTED.MONTHLY.OWNER.COSTS")
+Housing_Cleaned_data_2017 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2017, "SELECTED.MONTHLY.OWNER.COSTS")
 Housing_Cleaned_data_2018 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2018, "SELECTED.MONTHLY.OWNER.COSTS")
 Housing_Cleaned_data_2019 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2019, "SELECTED.MONTHLY.OWNER.COSTS")
 Housing_Cleaned_data_2021 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2021, "SELECTED.MONTHLY.OWNER.COSTS")
 
 #Removing Unit VALUE
+Housing_Cleaned_data_2015 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2015, "VALUE")
+Housing_Cleaned_data_2016 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2016, "VALUE")
+Housing_Cleaned_data_2017 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2017, "VALUE")
 Housing_Cleaned_data_2018 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2018, "VALUE")
 Housing_Cleaned_data_2019 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2019, "VALUE")
 Housing_Cleaned_data_2021 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2021, "VALUE")
 
 #Removing Unit YEAR.HOUSHOLDER.MOVED.INTO
+Housing_Cleaned_data_2015 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2015, "YEAR.HOUSEHOLDER.MOVED.INTO.UNIT")
+Housing_Cleaned_data_2016 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2016, "YEAR.HOUSEHOLDER.MOVED.INTO.UNIT")
+Housing_Cleaned_data_2017 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2017, "YEAR.HOUSEHOLDER.MOVED.INTO.UNIT")
 Housing_Cleaned_data_2018 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2018, "YEAR.HOUSEHOLDER.MOVED.INTO.UNIT")
 Housing_Cleaned_data_2019 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2019, "YEAR.HOUSEHOLDER.MOVED.INTO.UNIT")
 Housing_Cleaned_data_2021 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2021, "YEAR.HOUSEHOLDER.MOVED.INTO.UNIT")
 
 #Removing Unit SELECTED.CHARACTERISTICS
+Housing_Cleaned_data_2015 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2015, "SELECTED.CHARACTERISTICS")
+Housing_Cleaned_data_2016 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2016, "SELECTED.CHARACTERISTICS")
+Housing_Cleaned_data_2017 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2017, "SELECTED.CHARACTERISTICS")
 Housing_Cleaned_data_2018 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2018, "SELECTED.CHARACTERISTICS")
 Housing_Cleaned_data_2019 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2019, "SELECTED.CHARACTERISTICS")
 Housing_Cleaned_data_2021 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2021, "SELECTED.CHARACTERISTICS")
 
 #Removing Unit OCCUPANTS.PER.ROOM
+Housing_Cleaned_data_2015 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2015, "OCCUPANTS.PER.ROOM")
+Housing_Cleaned_data_2016 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2016, "OCCUPANTS.PER.ROOM")
+Housing_Cleaned_data_2017 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2017, "OCCUPANTS.PER.ROOM")
 Housing_Cleaned_data_2018 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2018, "OCCUPANTS.PER.ROOM")
 Housing_Cleaned_data_2019 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2019, "OCCUPANTS.PER.ROOM")
 Housing_Cleaned_data_2021 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2021, "OCCUPANTS.PER.ROOM")
 
 #Removing Unit GROSS.RENT
+Housing_Cleaned_data_2015 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2015, "GROSS.RENT")
+Housing_Cleaned_data_2016 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2016, "GROSS.RENT")
+Housing_Cleaned_data_2017 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2017, "GROSS.RENT")
 Housing_Cleaned_data_2018 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2018, "GROSS.RENT")
 Housing_Cleaned_data_2019 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2019, "GROSS.RENT")
 Housing_Cleaned_data_2021 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2021, "GROSS.RENT")
+
+
+Housing_Cleaned_data_2015 <- Housing_Cleaned_data_2015[,-c(1,3:5,8:10,13)]
+Housing_Cleaned_data_2016 <- Housing_Cleaned_data_2016[,-c(1,3:5,8:10,13)]
+Housing_Cleaned_data_2017 <- Housing_Cleaned_data_2017[,-c(1,3:5,8:10,13)]
 
 Housing_Cleaned_data_2018 <- Housing_Cleaned_data_2018[,-c(1,3:5,8:10,13)]
 Housing_Cleaned_data_2019 <- Housing_Cleaned_data_2019[,-c(1,3:5,8:10,13)]
@@ -167,12 +224,19 @@ feature_names_updated <- c("Geographic.Area.Name",
                            "Estimate..Households..Total...150.000.to..199.999", 
                            "Estimate..Households..Total...200.000.or.more")
 
-idx <- match(feature_names_updated, names(Income_data_ACS_2018))
-idx
+idx_2015 <- match(feature_names_updated, names(Income_data_ACS_2015))
+idx_2016 <- match(feature_names_updated, names(Income_data_ACS_2016))
+idx_2017 <- match(feature_names_updated, names(Income_data_ACS_2017))
+idx_2018 <- match(feature_names_updated, names(Income_data_ACS_2018))
+idx_2019 <- match(feature_names_updated, names(Income_data_ACS_2019))
+idx_2021 <- match(feature_names_updated, names(Income_data_ACS_2021))
 
-Income_Households_2018 <-Income_data_ACS_2018[, idx ]
-Income_Households_2019 <- Income_data_ACS_2019[, idx ]
-Income_Households_2021 <- Income_data_ACS_2021[, idx ]
+Income_Households_2015 <-Income_data_ACS_2015[, idx_2015 ]
+Income_Households_2016 <-Income_data_ACS_2016[, idx_2016 ]
+Income_Households_2017 <-Income_data_ACS_2017[, idx_2017 ]
+Income_Households_2018 <-Income_data_ACS_2018[, idx_2018 ]
+Income_Households_2019 <- Income_data_ACS_2019[, idx_2019 ]
+Income_Households_2021 <- Income_data_ACS_2021[, idx_2021 ]
 
 
 # Join all three datasets with eachother so we can get started on building the 
@@ -180,7 +244,20 @@ Income_Households_2021 <- Income_data_ACS_2021[, idx ]
 
 
 cost_of_living_data_by_county <- cost_of_living_data_by_county[,-c(1:2)]
-# 2018 
+
+
+Housing_and_Income_data_2015 <- merge(Housing_Cleaned_data_2015, Income_Households_2015,
+                                      by.x = "Geographic.Area.Name", by.y = "Geographic.Area.Name",
+                                      all.x =  TRUE)
+
+Housing_and_Income_data_2016 <- merge(Housing_Cleaned_data_2016, Income_Households_2016,
+                                      by.x = "Geographic.Area.Name", by.y = "Geographic.Area.Name",
+                                      all.x =  TRUE)
+
+Housing_and_Income_data_2017 <- merge(Housing_Cleaned_data_2017, Income_Households_2017,
+                                      by.x = "Geographic.Area.Name", by.y = "Geographic.Area.Name",
+                                      all.x =  TRUE)
+
 
 Housing_and_Income_data_2018 <- merge(Housing_Cleaned_data_2018, Income_Households_2018,
                                  by.x = "Geographic.Area.Name", by.y = "Geographic.Area.Name",
@@ -195,6 +272,12 @@ Housing_and_Income_data_2021 <- merge(Housing_Cleaned_data_2021, Income_Househol
                                  all.x =  TRUE)
 
 # Adding Cost of Living Data 
+Housing_and_Income_data_2015 <- merge(Housing_and_Income_data_2015, cost_of_living_data_by_county,
+                                      by.x = "Geographic.Area.Name", by.y = "County.And.State")
+Housing_and_Income_data_2016 <- merge(Housing_and_Income_data_2016, cost_of_living_data_by_county,
+                                      by.x = "Geographic.Area.Name", by.y = "County.And.State")
+Housing_and_Income_data_2017 <- merge(Housing_and_Income_data_2017, cost_of_living_data_by_county,
+                                      by.x = "Geographic.Area.Name", by.y = "County.And.State")
 
 Housing_and_Income_data_2018 <- merge(Housing_and_Income_data_2018, cost_of_living_data_by_county,
                                       by.x = "Geographic.Area.Name", by.y = "County.And.State")
@@ -208,6 +291,26 @@ Housing_and_Income_data_2021 <- merge(Housing_and_Income_data_2021, cost_of_livi
 
 # Combining all into one table 
 # Updating columname for 2018 dataset
+colnames(Housing_and_Income_data_2015)[7] <- "Percent..HOUSING.OCCUPANCY..Total.housing.units..Occupied.housing.units"
+colnames(Housing_and_Income_data_2015)[8] <- "Percent..HOUSING.OCCUPANCY..Total.housing.units..Vacant.housing.units"
+colnames(Housing_and_Income_data_2015)[9] <- "Percent..HOUSING.TENURE..Occupied.housing.units"
+colnames(Housing_and_Income_data_2015)[10] <- "Percent..HOUSING.TENURE..Occupied.housing.units..Owner.occupied"
+colnames(Housing_and_Income_data_2015)[11] <- "Percent..HOUSING.TENURE..Occupied.housing.units..Renter.occupied"
+
+
+colnames(Housing_and_Income_data_2016)[7] <- "Percent..HOUSING.OCCUPANCY..Total.housing.units..Occupied.housing.units"
+colnames(Housing_and_Income_data_2016)[8] <- "Percent..HOUSING.OCCUPANCY..Total.housing.units..Vacant.housing.units"
+colnames(Housing_and_Income_data_2016)[9] <- "Percent..HOUSING.TENURE..Occupied.housing.units"
+colnames(Housing_and_Income_data_2016)[10] <- "Percent..HOUSING.TENURE..Occupied.housing.units..Owner.occupied"
+colnames(Housing_and_Income_data_2016)[11] <- "Percent..HOUSING.TENURE..Occupied.housing.units..Renter.occupied"
+
+
+colnames(Housing_and_Income_data_2017)[7] <- "Percent..HOUSING.OCCUPANCY..Total.housing.units..Occupied.housing.units"
+colnames(Housing_and_Income_data_2017)[8] <- "Percent..HOUSING.OCCUPANCY..Total.housing.units..Vacant.housing.units"
+colnames(Housing_and_Income_data_2017)[9] <- "Percent..HOUSING.TENURE..Occupied.housing.units"
+colnames(Housing_and_Income_data_2017)[10] <- "Percent..HOUSING.TENURE..Occupied.housing.units..Owner.occupied"
+colnames(Housing_and_Income_data_2017)[11] <- "Percent..HOUSING.TENURE..Occupied.housing.units..Renter.occupied"
+
 
 colnames(Housing_and_Income_data_2018)[7] <- "Percent..HOUSING.OCCUPANCY..Total.housing.units..Occupied.housing.units"
 colnames(Housing_and_Income_data_2018)[8] <- "Percent..HOUSING.OCCUPANCY..Total.housing.units..Vacant.housing.units"
@@ -216,6 +319,8 @@ colnames(Housing_and_Income_data_2018)[10] <- "Percent..HOUSING.TENURE..Occupied
 colnames(Housing_and_Income_data_2018)[11] <- "Percent..HOUSING.TENURE..Occupied.housing.units..Renter.occupied"
 
 #### ALL THE COMBINED FEATURES #### 
+setdiff(colnames(Housing_and_Income_data_2018), colnames(Housing_and_Income_data_2019))
+
 final_dataset <- rbind(Housing_and_Income_data_2018, Housing_and_Income_data_2019)
 final_dataset <- rbind(final_dataset, Housing_and_Income_data_2021)
 
