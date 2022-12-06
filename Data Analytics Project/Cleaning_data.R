@@ -331,6 +331,10 @@ Housing_and_Income_data_2019 <- merge(Housing_and_Income_data_2019, cost_of_livi
 Housing_and_Income_data_2021 <- merge(Housing_and_Income_data_2021, cost_of_living_data_by_county,
                                       by.x = "Geographic.Area.Name", by.y = "County.And.State")
 
+# For each to account for inflation or the change of prices we have to multiply it by the
+# inflation rate that given year
+# From 2021 to 2015 using the average inflation rate for each year 
+# 0.1%, 1.3%, 2.1%, 2.4%, 1.8%, 4.7%
 # Combining all into one table 
 # Updating columname for 2018 dataset
 
