@@ -119,12 +119,12 @@ Housing_Cleaned_data_2018 <- return_feature_subset_without_given_string(Housing_
 Housing_Cleaned_data_2019 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2019, "GROSS.RENT.AS.A.PERCENTAGE.OF.HOUSEHOLD.INCOME..GRAPI")
 Housing_Cleaned_data_2021 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2021, "GROSS.RENT.AS.A.PERCENTAGE.OF.HOUSEHOLD.INCOME..GRAPI")
 
-#Removing Unit YEAR.HOUSHOLDER.MOVED.INTO
+#Removing Unit SELECTED.MONTHLY.OWNER.COSTS
 Housing_Cleaned_data_2018 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2018, "SELECTED.MONTHLY.OWNER.COSTS")
 Housing_Cleaned_data_2019 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2019, "SELECTED.MONTHLY.OWNER.COSTS")
 Housing_Cleaned_data_2021 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2021, "SELECTED.MONTHLY.OWNER.COSTS")
 
-#Removing Unit YEAR.HOUSHOLDER.MOVED.INTO
+#Removing Unit VALUE
 Housing_Cleaned_data_2018 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2018, "VALUE")
 Housing_Cleaned_data_2019 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2019, "VALUE")
 Housing_Cleaned_data_2021 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2021, "VALUE")
@@ -134,11 +134,24 @@ Housing_Cleaned_data_2018 <- return_feature_subset_without_given_string(Housing_
 Housing_Cleaned_data_2019 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2019, "YEAR.HOUSEHOLDER.MOVED.INTO.UNIT")
 Housing_Cleaned_data_2021 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2021, "YEAR.HOUSEHOLDER.MOVED.INTO.UNIT")
 
-#Removing Unit YEAR.HOUSHOLDER.MOVED.INTO
-Housing_Cleaned_data_2018 <- return_feature_subset_with_given_string(Housing_Cleaned_data_2018, "Percent")
-Housing_Cleaned_data_2019 <- return_feature_subset_with_given_string(Housing_Cleaned_data_2019, "Percent")
-Housing_Cleaned_data_2021 <- return_feature_subset_with_given_string(Housing_Cleaned_data_2021, "Percent")
+#Removing Unit SELECTED.CHARACTERISTICS
+Housing_Cleaned_data_2018 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2018, "SELECTED.CHARACTERISTICS")
+Housing_Cleaned_data_2019 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2019, "SELECTED.CHARACTERISTICS")
+Housing_Cleaned_data_2021 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2021, "SELECTED.CHARACTERISTICS")
 
+#Removing Unit OCCUPANTS.PER.ROOM
+Housing_Cleaned_data_2018 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2018, "OCCUPANTS.PER.ROOM")
+Housing_Cleaned_data_2019 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2019, "OCCUPANTS.PER.ROOM")
+Housing_Cleaned_data_2021 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2021, "OCCUPANTS.PER.ROOM")
+
+#Removing Unit GROSS.RENT
+Housing_Cleaned_data_2018 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2018, "GROSS.RENT")
+Housing_Cleaned_data_2019 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2019, "GROSS.RENT")
+Housing_Cleaned_data_2021 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2021, "GROSS.RENT")
+
+Housing_Cleaned_data_2018 <- Housing_Cleaned_data_2018[,-c(1,3:5,8:10,13)]
+Housing_Cleaned_data_2019 <- Housing_Cleaned_data_2019[,-c(1,3:5,8:10,13)]
+Housing_Cleaned_data_2021 <- Housing_Cleaned_data_2021[,-c(1,3:5,8:10,13)]
 
 # Feature names wanted from the income data 
 feature_names_updated <- c("Geographic.Area.Name",
@@ -162,6 +175,49 @@ Income_Households_2019 <- Income_data_ACS_2019[, idx ]
 Income_Households_2021 <- Income_data_ACS_2021[, idx ]
 
 
+# Join all three datasets with eachother so we can get started on building the 
+# Machine Learning Models 
+
+
+cost_of_living_data_by_county <- cost_of_living_data_by_county[,-c(1:2)]
+# 2018 
+
+Housing_and_Income_data_2018 <- merge(Housing_Cleaned_data_2018, Income_Households_2018,
+                                 by.x = "Geographic.Area.Name", by.y = "Geographic.Area.Name",
+                                 all.x =  TRUE)
+
+Housing_and_Income_data_2019 <- merge(Housing_Cleaned_data_2019, Income_Households_2019,
+                                 by.x = "Geographic.Area.Name", by.y = "Geographic.Area.Name",
+                                 all.x =  TRUE)
+
+Housing_and_Income_data_2021 <- merge(Housing_Cleaned_data_2021, Income_Households_2021,
+                                 by.x = "Geographic.Area.Name", by.y = "Geographic.Area.Name",
+                                 all.x =  TRUE)
+
+# Adding Cost of Living Data 
+
+Housing_and_Income_data_2018 <- merge(Housing_and_Income_data_2018, cost_of_living_data_by_county,
+                                      by.x = "Geographic.Area.Name", by.y = "County.And.State")
+
+
+Housing_and_Income_data_2019 <- merge(Housing_and_Income_data_2019, cost_of_living_data_by_county,
+                                      by.x = "Geographic.Area.Name", by.y = "County.And.State")
+
+Housing_and_Income_data_2021 <- merge(Housing_and_Income_data_2021, cost_of_living_data_by_county,
+                                      by.x = "Geographic.Area.Name", by.y = "County.And.State")
+
+# Combining all into one table 
+# Updating columname for 2018 dataset
+
+colnames(Housing_and_Income_data_2018)[7] <- "Percent..HOUSING.OCCUPANCY..Total.housing.units..Occupied.housing.units"
+colnames(Housing_and_Income_data_2018)[8] <- "Percent..HOUSING.OCCUPANCY..Total.housing.units..Vacant.housing.units"
+colnames(Housing_and_Income_data_2018)[9] <- "Percent..HOUSING.TENURE..Occupied.housing.units"
+colnames(Housing_and_Income_data_2018)[10] <- "Percent..HOUSING.TENURE..Occupied.housing.units..Owner.occupied"
+colnames(Housing_and_Income_data_2018)[11] <- "Percent..HOUSING.TENURE..Occupied.housing.units..Renter.occupied"
+
+#### ALL THE COMBINED FEATURES #### 
+final_dataset <- rbind(Housing_and_Income_data_2018, Housing_and_Income_data_2019)
+final_dataset <- rbind(final_dataset, Housing_and_Income_data_2021)
 
 
 
