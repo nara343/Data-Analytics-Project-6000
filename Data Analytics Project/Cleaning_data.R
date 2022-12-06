@@ -201,17 +201,8 @@ Housing_Cleaned_data_2018 <- return_feature_subset_without_given_string(Housing_
 Housing_Cleaned_data_2019 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2019, "GROSS.RENT")
 Housing_Cleaned_data_2021 <- return_feature_subset_without_given_string(Housing_Cleaned_data_2021, "GROSS.RENT")
 
-
-Housing_Cleaned_data_2015 <- Housing_Cleaned_data_2015[,-c(1,3:5,8:10,13)]
-Housing_Cleaned_data_2016 <- Housing_Cleaned_data_2016[,-c(1,3:5,8:10,13)]
-Housing_Cleaned_data_2017 <- Housing_Cleaned_data_2017[,-c(1,3:5,8:10,13)]
-
-Housing_Cleaned_data_2018 <- Housing_Cleaned_data_2018[,-c(1,3:5,8:10,13)]
-Housing_Cleaned_data_2019 <- Housing_Cleaned_data_2019[,-c(1,3:5,8:10,13)]
-Housing_Cleaned_data_2021 <- Housing_Cleaned_data_2021[,-c(1,3:5,8:10,13)]
-
 # Feature names wanted from the income data 
-feature_names_updated <- c("Geographic.Area.Name",
+feature_names_for_newer_datasets <- c("Geographic.Area.Name",
                            "Estimate..Households..Total",
                            "Estimate..Households..Total..Less.than..10.000",  
                            "Estimate..Households..Total...10.000.to..14.999",   
@@ -224,12 +215,28 @@ feature_names_updated <- c("Geographic.Area.Name",
                            "Estimate..Households..Total...150.000.to..199.999", 
                            "Estimate..Households..Total...200.000.or.more")
 
-idx_2015 <- match(feature_names_updated, names(Income_data_ACS_2015))
-idx_2016 <- match(feature_names_updated, names(Income_data_ACS_2016))
-idx_2017 <- match(feature_names_updated, names(Income_data_ACS_2017))
-idx_2018 <- match(feature_names_updated, names(Income_data_ACS_2018))
-idx_2019 <- match(feature_names_updated, names(Income_data_ACS_2019))
-idx_2021 <- match(feature_names_updated, names(Income_data_ACS_2021))
+# Feature names wanted from the income data 
+
+feature_names_for_older_datasets <- c("Geographic.Area.Name",
+                                      "Households..Estimate..Total",
+                                      "Households..Estimate..Less.than..10.000",  
+                                      "Households..Estimate...10.000.to..14.999",   
+                                      "Households..Estimate...15.000.to..24.999",  
+                                      "Households..Estimate...25.000.to..34.999",  
+                                      "Households..Estimate...35.000.to..49.999",                                                                       
+                                      "Households..Estimate...50.000.to..74.999",  
+                                      "Households..Estimate...75.000.to..99.999", 
+                                      "Households..Estimate...100.000.to..149.999",  
+                                      "Households..Estimate...150.000.to..199.999", 
+                                      "Households..Estimate...200.000.or.more")
+
+
+idx_2015 <- match(feature_names_for_older_datasets, names(Income_data_ACS_2015))
+idx_2016 <- match(feature_names_for_older_datasets, names(Income_data_ACS_2016))
+idx_2017 <- match(feature_names_for_older_datasets, names(Income_data_ACS_2017))
+idx_2018 <- match(feature_names_for_newer_datasets, names(Income_data_ACS_2018))
+idx_2019 <- match(feature_names_for_newer_datasets, names(Income_data_ACS_2019))
+idx_2021 <- match(feature_names_for_newer_datasets, names(Income_data_ACS_2021))
 
 Income_Households_2015 <-Income_data_ACS_2015[, idx_2015 ]
 Income_Households_2016 <-Income_data_ACS_2016[, idx_2016 ]
@@ -238,9 +245,44 @@ Income_Households_2018 <-Income_data_ACS_2018[, idx_2018 ]
 Income_Households_2019 <- Income_data_ACS_2019[, idx_2019 ]
 Income_Households_2021 <- Income_data_ACS_2021[, idx_2021 ]
 
+# Renaming the columns so each has the same column name so when merging it doesn't
+# Cause an issue or create empty columns with NAs 
+colnames(Income_Households_2018)[2] <- "Households..Estimate..Total"
+colnames(Income_Households_2018)[3] <- "Households..Estimate..Less.than..10.000"
+colnames(Income_Households_2018)[4] <- "Households..Estimate...10.000.to..14.999"
+colnames(Income_Households_2018)[5] <- "Households..Estimate...15.000.to..24.999"
+colnames(Income_Households_2018)[6] <- "Households..Estimate...25.000.to..34.999"
+colnames(Income_Households_2018)[7] <- "Households..Estimate...35.000.to..49.999"
+colnames(Income_Households_2018)[8] <- "Households..Estimate...50.000.to..74.999"
+colnames(Income_Households_2018)[9] <- "Households..Estimate...75.000.to..99.999"
+colnames(Income_Households_2018)[10] <- "Households..Estimate...100.000.to..149.999"
+colnames(Income_Households_2018)[11] <- "Households..Estimate...150.000.to..199.999"
+colnames(Income_Households_2018)[12] <- "Households..Estimate...200.000.or.more"
 
-# Join all three datasets with eachother so we can get started on building the 
-# Machine Learning Models 
+colnames(Income_Households_2019)[2] <- "Households..Estimate..Total"
+colnames(Income_Households_2019)[3] <- "Households..Estimate..Less.than..10.000"
+colnames(Income_Households_2019)[4] <- "Households..Estimate...10.000.to..14.999"
+colnames(Income_Households_2019)[5] <- "Households..Estimate...15.000.to..24.999"
+colnames(Income_Households_2019)[6] <- "Households..Estimate...25.000.to..34.999"
+colnames(Income_Households_2019)[7] <- "Households..Estimate...35.000.to..49.999"
+colnames(Income_Households_2019)[8] <- "Households..Estimate...50.000.to..74.999"
+colnames(Income_Households_2019)[9] <- "Households..Estimate...75.000.to..99.999"
+colnames(Income_Households_2019)[10] <- "Households..Estimate...100.000.to..149.999"
+colnames(Income_Households_2019)[11] <- "Households..Estimate...150.000.to..199.999"
+colnames(Income_Households_2019)[12] <- "Households..Estimate...200.000.or.more"
+
+
+colnames(Income_Households_2021)[2] <- "Households..Estimate..Total"
+colnames(Income_Households_2021)[3] <- "Households..Estimate..Less.than..10.000"
+colnames(Income_Households_2021)[4] <- "Households..Estimate...10.000.to..14.999"
+colnames(Income_Households_2021)[5] <- "Households..Estimate...15.000.to..24.999"
+colnames(Income_Households_2021)[6] <- "Households..Estimate...25.000.to..34.999"
+colnames(Income_Households_2021)[7] <- "Households..Estimate...35.000.to..49.999"
+colnames(Income_Households_2021)[8] <- "Households..Estimate...50.000.to..74.999"
+colnames(Income_Households_2021)[9] <- "Households..Estimate...75.000.to..99.999"
+colnames(Income_Households_2021)[10] <- "Households..Estimate...100.000.to..149.999"
+colnames(Income_Households_2021)[11] <- "Households..Estimate...150.000.to..199.999"
+colnames(Income_Households_2021)[12] <- "Households..Estimate...200.000.or.more"
 
 
 cost_of_living_data_by_county <- cost_of_living_data_by_county[,-c(1:2)]
@@ -291,38 +333,37 @@ Housing_and_Income_data_2021 <- merge(Housing_and_Income_data_2021, cost_of_livi
 
 # Combining all into one table 
 # Updating columname for 2018 dataset
-colnames(Housing_and_Income_data_2015)[7] <- "Percent..HOUSING.OCCUPANCY..Total.housing.units..Occupied.housing.units"
-colnames(Housing_and_Income_data_2015)[8] <- "Percent..HOUSING.OCCUPANCY..Total.housing.units..Vacant.housing.units"
-colnames(Housing_and_Income_data_2015)[9] <- "Percent..HOUSING.TENURE..Occupied.housing.units"
-colnames(Housing_and_Income_data_2015)[10] <- "Percent..HOUSING.TENURE..Occupied.housing.units..Owner.occupied"
-colnames(Housing_and_Income_data_2015)[11] <- "Percent..HOUSING.TENURE..Occupied.housing.units..Renter.occupied"
+
+colnames(Housing_and_Income_data_2018)[13] <- "Percent..HOUSING.OCCUPANCY..Total.housing.units"
+colnames(Housing_and_Income_data_2018)[14] <- "Percent..HOUSING.OCCUPANCY..Total.housing.units..Occupied.housing.units"
+colnames(Housing_and_Income_data_2018)[15] <- "Percent..HOUSING.OCCUPANCY..Total.housing.units..Vacant.housing.units"
+colnames(Housing_and_Income_data_2018)[16] <- "Percent..HOUSING.TENURE..Occupied.housing.units"
+colnames(Housing_and_Income_data_2018)[17] <- "Percent..HOUSING.TENURE..Occupied.housing.units..Owner.occupied"
+colnames(Housing_and_Income_data_2018)[18] <- "Percent..HOUSING.TENURE..Occupied.housing.units..Renter.occupied"
+
+colnames(Housing_and_Income_data_2015)[9] <- "Estimate..HOUSING.OCCUPANCY..Total.housing.units..Homeowner.vacancy.rate"
+colnames(Housing_and_Income_data_2015)[10] <- "Estimate..HOUSING.OCCUPANCY..Total.housing.units..Rental.vacancy.rate"
+colnames(Housing_and_Income_data_2015)[17] <- "Estimate..HOUSING.TENURE..Occupied.housing.units..Average.household.size.of.owner.occupied.unit"
+colnames(Housing_and_Income_data_2015)[18] <- "Estimate..HOUSING.TENURE..Occupied.housing.units..Average.household.size.of.renter.occupied.unit"
+
+colnames(Housing_and_Income_data_2016)[9] <- "Estimate..HOUSING.OCCUPANCY..Total.housing.units..Homeowner.vacancy.rate"
+colnames(Housing_and_Income_data_2016)[10] <- "Estimate..HOUSING.OCCUPANCY..Total.housing.units..Rental.vacancy.rate"
+colnames(Housing_and_Income_data_2016)[17] <- "Estimate..HOUSING.TENURE..Occupied.housing.units..Average.household.size.of.owner.occupied.unit"
+colnames(Housing_and_Income_data_2016)[18] <- "Estimate..HOUSING.TENURE..Occupied.housing.units..Average.household.size.of.renter.occupied.unit"
+
+colnames(Housing_and_Income_data_2017)[9] <- "Estimate..HOUSING.OCCUPANCY..Total.housing.units..Homeowner.vacancy.rate"
+colnames(Housing_and_Income_data_2017)[10] <- "Estimate..HOUSING.OCCUPANCY..Total.housing.units..Rental.vacancy.rate"
+colnames(Housing_and_Income_data_2017)[17] <- "Estimate..HOUSING.TENURE..Occupied.housing.units..Average.household.size.of.owner.occupied.unit"
+colnames(Housing_and_Income_data_2017)[18] <- "Estimate..HOUSING.TENURE..Occupied.housing.units..Average.household.size.of.renter.occupied.unit"
 
 
-colnames(Housing_and_Income_data_2016)[7] <- "Percent..HOUSING.OCCUPANCY..Total.housing.units..Occupied.housing.units"
-colnames(Housing_and_Income_data_2016)[8] <- "Percent..HOUSING.OCCUPANCY..Total.housing.units..Vacant.housing.units"
-colnames(Housing_and_Income_data_2016)[9] <- "Percent..HOUSING.TENURE..Occupied.housing.units"
-colnames(Housing_and_Income_data_2016)[10] <- "Percent..HOUSING.TENURE..Occupied.housing.units..Owner.occupied"
-colnames(Housing_and_Income_data_2016)[11] <- "Percent..HOUSING.TENURE..Occupied.housing.units..Renter.occupied"
 
-
-colnames(Housing_and_Income_data_2017)[7] <- "Percent..HOUSING.OCCUPANCY..Total.housing.units..Occupied.housing.units"
-colnames(Housing_and_Income_data_2017)[8] <- "Percent..HOUSING.OCCUPANCY..Total.housing.units..Vacant.housing.units"
-colnames(Housing_and_Income_data_2017)[9] <- "Percent..HOUSING.TENURE..Occupied.housing.units"
-colnames(Housing_and_Income_data_2017)[10] <- "Percent..HOUSING.TENURE..Occupied.housing.units..Owner.occupied"
-colnames(Housing_and_Income_data_2017)[11] <- "Percent..HOUSING.TENURE..Occupied.housing.units..Renter.occupied"
-
-
-colnames(Housing_and_Income_data_2018)[7] <- "Percent..HOUSING.OCCUPANCY..Total.housing.units..Occupied.housing.units"
-colnames(Housing_and_Income_data_2018)[8] <- "Percent..HOUSING.OCCUPANCY..Total.housing.units..Vacant.housing.units"
-colnames(Housing_and_Income_data_2018)[9] <- "Percent..HOUSING.TENURE..Occupied.housing.units"
-colnames(Housing_and_Income_data_2018)[10] <- "Percent..HOUSING.TENURE..Occupied.housing.units..Owner.occupied"
-colnames(Housing_and_Income_data_2018)[11] <- "Percent..HOUSING.TENURE..Occupied.housing.units..Renter.occupied"
-
-#### ALL THE COMBINED FEATURES #### 
-setdiff(colnames(Housing_and_Income_data_2018), colnames(Housing_and_Income_data_2019))
-
-final_dataset <- rbind(Housing_and_Income_data_2018, Housing_and_Income_data_2019)
+final_dataset <- rbind(Housing_and_Income_data_2015, Housing_and_Income_data_2016)
+final_dataset <- rbind(final_dataset, Housing_and_Income_data_2017)
+final_dataset <- rbind(final_dataset, Housing_and_Income_data_2018)
+final_dataset <- rbind(final_dataset, Housing_and_Income_data_2019)
 final_dataset <- rbind(final_dataset, Housing_and_Income_data_2021)
 
 
+#Update what the 
 
