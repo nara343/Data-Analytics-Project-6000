@@ -1,4 +1,14 @@
-
+adjust_cost_by_inflation <- function(df1, df2, rate){
+  
+  df2$Average.Cost.Of.Rent = df1$Average.Cost.Of.Rent/ (1+rate)
+  df2$Average.Cost.of.Insurance.With.Employer = df1$Average.Cost.of.Insurance.With.Employer/ (1+rate)
+  df2$Average.Transportation.Expense = df1$Average.Transportation.Expense/ (1+rate)
+  df2$Average.Misc.Expense = df1$Average.Misc.Expense/ (1+rate)
+  df2$Total.Cost = df1$Total.Cost / (1+rate)
+  
+  return(df2)
+  
+}
 
 remove_nas <- function(df, Null, rate=0.5) {
   totalRows <- nrow(df)
@@ -333,8 +343,14 @@ Housing_and_Income_data_2021 <- merge(Housing_and_Income_data_2021, cost_of_livi
 
 # For each to account for inflation or the change of prices we have to multiply it by the
 # inflation rate that given year
-# From 2021 to 2015 using the average inflation rate for each year 
-# 0.1%, 1.3%, 2.1%, 2.4%, 1.8%, 4.7%
+# From 2015 to 2021 using the average inflation rate for each year 
+# 2021 - 4.7% 
+# 2020 - 1.2%
+# 2019 - 1.81%
+# 2018 - 2.44%
+# 2017 - 2.13%
+# 2016 - 1.26%
+# 2015 - 0.12%
 # Combining all into one table 
 # Updating columname for 2018 dataset
 
