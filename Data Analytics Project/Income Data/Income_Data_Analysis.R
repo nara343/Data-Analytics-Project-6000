@@ -46,7 +46,6 @@ Income_data_ACS_2021 <- Income_data_ACS_2021[, remove_nas(Income_data_ACS_2021, 
 
 
 
-colnames(Income_data_ACS_2010)
 household_features <- c("Geographic.Area.Name",
                         "Households..Estimate..Total",
                         "Households..Estimate..Less.than..10.000",  
@@ -125,7 +124,7 @@ california_2021_household <- return_subset_by_state(Household_2021, "California"
 
 california_2021_household <- california_2021_household[, -c(1:2)]
 
-means_for_each_category <- return_col_means(california_2018_household)
+means_for_each_category <- return_col_means(california_2021_household)
 means_for_each_category$group <- factor(means_for_each_category$group, 
                                         levels = means_for_each_category$group)
 
@@ -212,7 +211,7 @@ means_for_each_category$group <- factor(means_for_each_category$group,
 WA_income_brackets_2018 <- ggplot(means_for_each_category, aes(x = values, y = group)) +
   geom_bar(stat = "identity", fill = "red", alpha = 0.5) + 
   scale_y_discrete(limits=rev) + 
-  xlab("Percent of Total Household In New York") + 
+  xlab("Percent of Total Household In Washington") + 
   ylab("Income Bracket ") + 
   labs(title = "Washington Percent of Total Household Borken Down by Income Bracket 2018")
 
@@ -248,7 +247,7 @@ means_for_each_category$group <- factor(means_for_each_category$group,
 WA_income_brackets_2021 <- ggplot(means_for_each_category, aes(x = values, y = group)) +
   geom_bar(stat = "identity", fill = "green4", alpha = 0.5) + 
   scale_y_discrete(limits=rev) + 
-  xlab("Percent of Total Household In New York") + 
+  xlab("Percent of Total Household In Washington") + 
   ylab("Income Bracket ") + 
   labs(title = "Washington Percent of Total Household Borken Down by Income Bracket 2021")
 

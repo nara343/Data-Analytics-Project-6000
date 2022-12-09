@@ -112,7 +112,7 @@ generate_data <- function(df, sampleSize) {
 
 df_california <- final_dataset[final_dataset$State == "CA",]
 generated_data_points <- generate_data(df_california, 100)
-
+View(generated_data_points)
 
 library(ggplot2)
 

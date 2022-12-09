@@ -7,16 +7,7 @@ The objective of the project is to use 3-4 different Machine Learning models to 
 
 Based off of this we should see an linear increase in each section, as inflation gross we see an increase in income to combat it. If the cost of living increases we should also see a linear increase to income. 
 
-### There will be three different models built: 
-- The first model is a linear regression model
-    - Using the data from the past century and the cost of essentials can we predict when or if the average cost of living will beging to consume someone's entire wage? If so when will we predict that event occuring? Will this ever be something we see or will a major event occur before we reach this point.
-- Second a clustering model
-    - Identifying different groups of people based off income and predicting when will they be considered the poverty. 
-    - Motivation: In the past someone was able to live off a smaller wage comfortably ($30,000) but with the increase of cost of living they are no longer considered middle class but poverished. Are we able to predict when these groups will be considered "poverished" 
-- An XGBoost model
-    - With the cost of living increase we might also notice an increase in the number of household memebers and a decrease in children had by a family. 
-    - Motivation: If cost of living increases will births decrease and the average household increase. What has been the trend from 1920 to  2020. 
-    
+
     
     
 ### Data Set Links

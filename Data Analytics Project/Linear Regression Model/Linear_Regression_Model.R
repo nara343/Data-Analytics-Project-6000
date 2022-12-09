@@ -98,7 +98,7 @@ print(nrow(lower) + nrow(upper))
 df <- df[df$Estimate..HOUSING.OCCUPANCY..Total.housing.units >= Lower_Units,]
 df <- df[df$Estimate..HOUSING.OCCUPANCY..Total.housing.units <= Upper_Units,]
 
-#### Model Building ####
+#### Model Building With Filtered Data ####
 
 lm.fit <- lm(Average.Cost.Of.Rent~Estimate..HOUSING.OCCUPANCY..Total.housing.units, data = df)
 summary(lm.fit)
@@ -134,6 +134,22 @@ ggplot(df, aes(x = Estimate..HOUSING.OCCUPANCY..Total.housing.units, y =Average.
 
 
 df_california <- df[df$State == "CA",]
+summary(df_california)
+# We still have some outliners for the total number of housing so we will also remove those 
+Q1 <- 63160
+Q3 <- 339106
+IQR_Unit_Total <- Q3 - Q1
+
+Lower_Units <- Q1 - (1.5*IQR_Unit_Total)
+Upper_Units <- Q3 + (1.5*IQR_Unit_Total)
+
+
+# We have 60 rows that meet this critiria and it will be removed because of this reason
+
+df_california <- df_california[df_california$Estimate..HOUSING.OCCUPANCY..Total.housing.units >= Lower_Units,]
+df_california <- df_california[df_california$Estimate..HOUSING.OCCUPANCY..Total.housing.units <= Upper_Units,]
+
+
 lm.fit <- lm(Average.Cost.Of.Rent~Estimate..HOUSING.OCCUPANCY..Total.housing.units, data = df_california)
 summary(lm.fit)
 # Residuals:
@@ -164,9 +180,30 @@ ggplot(df_california, aes(x = Estimate..HOUSING.OCCUPANCY..Total.housing.units, 
 
 
 df_NY <- df[df$State == "NY",]
+
+summary(df_NY)
+# We still have some outliners for the total number of housing so we will also remove those 
+Q1 <- 47369
+Q3 <- 205492
+IQR_Unit_Total <- Q3 - Q1
+
+Lower_Units <- Q1 - (1.5*IQR_Unit_Total)
+Upper_Units <- Q3 + (1.5*IQR_Unit_Total)
+
+
+# We have 60 rows that meet this critiria and it will be removed because of this reason
+
+df_NY <- df_NY[df_NY$Estimate..HOUSING.OCCUPANCY..Total.housing.units >= Lower_Units,]
+df_NY <- df_NY[df_NY$Estimate..HOUSING.OCCUPANCY..Total.housing.units <= Upper_Units,]
+
+
 lm.fit <- lm(Average.Cost.Of.Rent~Estimate..HOUSING.OCCUPANCY..Total.housing.units, data = df_NY)
 summary(lm.fit)
 
+# Call:
+#   lm(formula = Average.Cost.Of.Rent ~ Estimate..HOUSING.OCCUPANCY..Total.housing.units, 
+#      data = df_NY)
+# 
 # Residuals:
 #   Min      1Q  Median      3Q     Max 
 # -9152.0 -1638.9  -591.7  1900.5 12914.5 
@@ -195,8 +232,30 @@ ggplot(df_NY, aes(x = Estimate..HOUSING.OCCUPANCY..Total.housing.units, y =Avera
 
 
 df_WA <- df[df$State == "WA",]
+
+summary(df_WA)
+# We still have some outliners for the total number of housing so we will also remove those 
+Q1 <- 37459                                   
+Q3 <- 174714                                                      
+IQR_Unit_Total <- Q3 - Q1
+
+Lower_Units <- Q1 - (1.5*IQR_Unit_Total)
+Upper_Units <- Q3 + (1.5*IQR_Unit_Total)
+
+
+# We have 60 rows that meet this critiria and it will be removed because of this reason
+
+df_WA <- df_WA[df_WA$Estimate..HOUSING.OCCUPANCY..Total.housing.units >= Lower_Units,]
+df_WA <- df_WA[df_WA$Estimate..HOUSING.OCCUPANCY..Total.housing.units <= Upper_Units,]
+
+
 lm.fit <- lm(Average.Cost.Of.Rent~Estimate..HOUSING.OCCUPANCY..Total.housing.units, data = df_WA)
 summary(lm.fit)
+
+# Call:
+#   lm(formula = Average.Cost.Of.Rent ~ Estimate..HOUSING.OCCUPANCY..Total.housing.units, 
+#      data = df_WA)
+# 
 # Residuals:
 #   Min     1Q Median     3Q    Max 
 # -6396  -2128   -642   1662  11387 
@@ -211,6 +270,7 @@ summary(lm.fit)
 # Residual standard error: 3265 on 109 degrees of freedom
 # Multiple R-squared:  0.2429,	Adjusted R-squared:  0.236 
 # F-statistic: 34.97 on 1 and 109 DF,  p-value: 3.901e-08
+
 
 coeff <- coefficients(lm.fit)
 inter <- coeff[1]

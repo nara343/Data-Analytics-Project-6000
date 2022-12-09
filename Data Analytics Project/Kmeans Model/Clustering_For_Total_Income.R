@@ -11,7 +11,7 @@ normalize <- function(x) {
 }
 
 df <- final_dataset[,c(19:28,30:33)]
-
+colnames(df)
 # Normalize the data 
 
 norm_data <- as.data.frame(lapply(df,normalize))
@@ -68,4 +68,3 @@ sum(diag(table))/sum(table)
 
 
 clusplot(norm_data, df_cluster$cluster, color=T, shade=T, labels=0, lines=0)
-
