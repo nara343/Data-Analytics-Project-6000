@@ -295,9 +295,6 @@ colnames(Income_Households_2021)[11] <- "Households..Estimate...150.000.to..199.
 colnames(Income_Households_2021)[12] <- "Households..Estimate...200.000.or.more"
 
 
-cost_of_living_data_by_county <- cost_of_living_data_by_county[,-c(1:2)]
-
-
 Housing_and_Income_data_2015 <- merge(Housing_Cleaned_data_2015, Income_Households_2015,
                                       by.x = "Geographic.Area.Name", by.y = "Geographic.Area.Name",
                                       all.x =  TRUE)
@@ -323,26 +320,13 @@ Housing_and_Income_data_2021 <- merge(Housing_Cleaned_data_2021, Income_Househol
                                  by.x = "Geographic.Area.Name", by.y = "Geographic.Area.Name",
                                  all.x =  TRUE)
 
-# Adding Cost of Living Data 
-Housing_and_Income_data_2015 <- merge(Housing_and_Income_data_2015, cost_of_living_data_by_county,
-                                      by.x = "Geographic.Area.Name", by.y = "County.And.State")
-Housing_and_Income_data_2016 <- merge(Housing_and_Income_data_2016, cost_of_living_data_by_county,
-                                      by.x = "Geographic.Area.Name", by.y = "County.And.State")
-Housing_and_Income_data_2017 <- merge(Housing_and_Income_data_2017, cost_of_living_data_by_county,
-                                      by.x = "Geographic.Area.Name", by.y = "County.And.State")
-
-Housing_and_Income_data_2018 <- merge(Housing_and_Income_data_2018, cost_of_living_data_by_county,
-                                      by.x = "Geographic.Area.Name", by.y = "County.And.State")
-
-
-Housing_and_Income_data_2019 <- merge(Housing_and_Income_data_2019, cost_of_living_data_by_county,
-                                      by.x = "Geographic.Area.Name", by.y = "County.And.State")
-
-Housing_and_Income_data_2021 <- merge(Housing_and_Income_data_2021, cost_of_living_data_by_county,
-                                      by.x = "Geographic.Area.Name", by.y = "County.And.State")
-
+# Adjusting cost of living data
 # For each to account for inflation or the change of prices we have to multiply it by the
-# inflation rate that given year
+# inflation rate that given year or the cumilation.
+# The cost of living data has been adjusted to represent the cost of 2021
+# To get the previous years we need to account for the inflation between those year
+# (Cost)/(1+rate)
+
 # From 2015 to 2021 using the average inflation rate for each year 
 # 2021 - 4.7% 
 # 2020 - 1.2%
@@ -351,6 +335,42 @@ Housing_and_Income_data_2021 <- merge(Housing_and_Income_data_2021, cost_of_livi
 # 2017 - 2.13%
 # 2016 - 1.26%
 # 2015 - 0.12%
+cost_of_living_2015 <- cost_of_living_data_by_county
+cost_of_living_2015 <- adjust_cost_by_inflation(cost_of_living_2015,cost_of_living_data_by_county, 0.1354 )
+
+cost_of_living_2016 <- cost_of_living_data_by_county
+cost_of_living_2016 <- adjust_cost_by_inflation(cost_of_living_2016,cost_of_living_data_by_county, 0.1228 )
+
+cost_of_living_2017 <- cost_of_living_data_by_county
+cost_of_living_2017 <- adjust_cost_by_inflation(cost_of_living_2017,cost_of_living_data_by_county, 0.1015 )
+
+cost_of_living_2018 <- cost_of_living_data_by_county
+cost_of_living_2018 <- adjust_cost_by_inflation(cost_of_living_2018,cost_of_living_data_by_county, 0.0771 )
+
+cost_of_living_2019 <- cost_of_living_data_by_county
+cost_of_living_2019 <- adjust_cost_by_inflation(cost_of_living_2015,cost_of_living_data_by_county, 0.059 )
+
+# Adding Cost of Living Data 
+Housing_and_Income_data_2015 <- merge(Housing_and_Income_data_2015, cost_of_living_2015,
+                                      by.x = "Geographic.Area.Name", by.y = "County.And.State")
+
+Housing_and_Income_data_2016 <- merge(Housing_and_Income_data_2016, cost_of_living_2016,
+                                      by.x = "Geographic.Area.Name", by.y = "County.And.State")
+
+Housing_and_Income_data_2017 <- merge(Housing_and_Income_data_2017, cost_of_living_2017,
+                                      by.x = "Geographic.Area.Name", by.y = "County.And.State")
+
+Housing_and_Income_data_2018 <- merge(Housing_and_Income_data_2018, cost_of_living_2018,
+                                      by.x = "Geographic.Area.Name", by.y = "County.And.State")
+
+
+Housing_and_Income_data_2019 <- merge(Housing_and_Income_data_2019, cost_of_living_2019,
+                                      by.x = "Geographic.Area.Name", by.y = "County.And.State")
+
+Housing_and_Income_data_2021 <- merge(Housing_and_Income_data_2021, cost_of_living_data_by_county,
+                                      by.x = "Geographic.Area.Name", by.y = "County.And.State")
+
+
 # Combining all into one table 
 # Updating columname for 2018 dataset
 
@@ -385,5 +405,5 @@ final_dataset <- rbind(final_dataset, Housing_and_Income_data_2019)
 final_dataset <- rbind(final_dataset, Housing_and_Income_data_2021)
 
 
-#Update what the 
-
+final_dataset <- final_dataset[,-c(2)]
+final_dataset <- final_dataset[,-c(30)]

@@ -15,7 +15,6 @@ Income_data_ACS_2018 <- read.csv("ACSST1Y2018.S1901-Data.csv", skip=1)
 Income_data_ACS_2019 <- read.csv("ACSST1Y2019.S1901-Data.csv", skip=1)
 Income_data_ACS_2021 <- read.csv("ACSST1Y2021.S1901-Data.csv", skip=1)
 
-summary(Income_data_ACS_2010)
 # Loading Housing Statistics # 
 
 # Working on Desktop
