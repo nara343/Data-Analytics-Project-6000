@@ -11,12 +11,6 @@ df <- final_dataset[,c(2,29:30)]
 # Graphinh a scatter plot of it 
 library(ggplot2)
 
-# scatter_height_weight <- ggplot(obesity_data, 
-#                                 aes(x = Height, Weight)) +
-#   geom_point(aes(color = NObeyesdad), size = 3, alpha = 0.5) +
-#   xlab(" Height (meters) ") + 
-#   ylab(" Weight kg ") +
-#   ggtitle("Scatter Plot of Height and Weight")
 
 # Looking at the graph there are outlines and those need to be adjusted so we will
 # using IQR to filter them out 

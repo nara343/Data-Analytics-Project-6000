@@ -5,9 +5,6 @@
 # Working on Desktop
 setwd("C:/Users/Naran/Data-Analytics-Project-6000/Data Analytics Project/Income Data")
 
-#Working on Laptop
-# setwd("C:/Users/Naran/Data-Analytics-Project-6000/Data Analytics Project/Income Data")
-
 Income_data_ACS_2015 <- read.csv("ACSST1Y2015.S1901-Data.csv", skip=1)
 Income_data_ACS_2016 <- read.csv("ACSST1Y2016.S1901-Data.csv", skip=1)
 Income_data_ACS_2017 <- read.csv("ACSST1Y2017.S1901-Data.csv", skip=1)

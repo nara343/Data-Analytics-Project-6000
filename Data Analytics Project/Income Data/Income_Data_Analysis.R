@@ -1,5 +1,5 @@
 # Removing columns that contain lots of null values 
-
+library(ggplot2)
 return_col_means <- function(df){
   names <- c()
   val <- c()
@@ -36,11 +36,7 @@ remove_nas <- function(df, Null) {
 
 #Removing Null Values Based On if There are more than 50, "NULL" values 
 # entry in the estimate and margin of error columns indicates that data for this geographic area cannot be displayed because the number of sample cases is too small
-Income_data_ACS_2010 <- Income_data_ACS_2010[, remove_nas(Income_data_ACS_2010, "null")]
-Income_data_ACS_2011 <- Income_data_ACS_2011[, remove_nas(Income_data_ACS_2011, "null")]
-Income_data_ACS_2012 <- Income_data_ACS_2012[, remove_nas(Income_data_ACS_2012, "null")]
-Income_data_ACS_2013 <- Income_data_ACS_2013[, remove_nas(Income_data_ACS_2013, "null")]
-Income_data_ACS_2014 <- Income_data_ACS_2014[, remove_nas(Income_data_ACS_2014, "null")]
+
 Income_data_ACS_2015 <- Income_data_ACS_2015[, remove_nas(Income_data_ACS_2015, "null")]
 Income_data_ACS_2016 <- Income_data_ACS_2016[, remove_nas(Income_data_ACS_2016, "null")]
 Income_data_ACS_2017 <- Income_data_ACS_2017[, remove_nas(Income_data_ACS_2017, "null")]
@@ -103,6 +99,7 @@ california_income_brackets_2018 <- ggplot(means_for_each_category, aes(x = value
   xlab("Percent of Total Household In California") + 
   ylab("Income Bracket ") + 
   labs(title = "Percent of Total Household Borken Down by Income Bracket 2018")
+california_income_brackets_2018
   
 # 2019
 california_2019_household <- return_subset_by_state(Household_2019, "California")
@@ -133,7 +130,7 @@ means_for_each_category$group <- factor(means_for_each_category$group,
                                         levels = means_for_each_category$group)
 
 california_income_brackets_2021 <- ggplot(means_for_each_category, aes(x = values, y = group)) +
-  geom_bar(stat = "identity", fill = "green", alpha = 0.5) + 
+  geom_bar(stat = "identity", fill = "green4", alpha = 0.5) + 
   scale_y_discrete(limits=rev) + 
   xlab("Percent of Total Household In California") + 
   ylab("Income Bracket ") + 
@@ -173,7 +170,7 @@ means_for_each_category$group <- factor(means_for_each_category$group,
                                         levels = means_for_each_category$group)
 
 NY_income_brackets_2019 <- ggplot(means_for_each_category, aes(x = values, y = group)) +
-  geom_bar(stat = "identity", fill = "red", alpha = 0.5) + 
+  geom_bar(stat = "identity", fill = "purple", alpha = 0.5) + 
   scale_y_discrete(limits=rev) + 
   xlab("Percent of Total Household In New York") + 
   ylab("Income Bracket ") + 
@@ -192,7 +189,7 @@ means_for_each_category$group <- factor(means_for_each_category$group,
                                         levels = means_for_each_category$group)
 
 NY_income_brackets_2021 <- ggplot(means_for_each_category, aes(x = values, y = group)) +
-  geom_bar(stat = "identity", fill = "red", alpha = 0.5) + 
+  geom_bar(stat = "identity", fill = "green4", alpha = 0.5) + 
   scale_y_discrete(limits=rev) + 
   xlab("Percent of Total Household In New York") + 
   ylab("Income Bracket ") + 
@@ -249,7 +246,7 @@ means_for_each_category$group <- factor(means_for_each_category$group,
                                         levels = means_for_each_category$group)
 
 WA_income_brackets_2021 <- ggplot(means_for_each_category, aes(x = values, y = group)) +
-  geom_bar(stat = "identity", fill = "green", alpha = 0.5) + 
+  geom_bar(stat = "identity", fill = "green4", alpha = 0.5) + 
   scale_y_discrete(limits=rev) + 
   xlab("Percent of Total Household In New York") + 
   ylab("Income Bracket ") + 

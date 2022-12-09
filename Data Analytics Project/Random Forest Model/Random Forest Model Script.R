@@ -1,5 +1,5 @@
 # Using random forest to determine if we can predict each state
-# Then take it a step further to see if we can classify each county for each state
+
 
 library(caret)
 library(randomForest)
